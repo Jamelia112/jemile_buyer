@@ -1,128 +1,117 @@
-:root {
-  --bg: #0B0B0B;
-  --text: #F3F3F3;
-  --muted: #B8B8B8;
-  --accent: #C1A875;
+:root{
+  --bg:#0B0B0B;
+  --text:#F3F3F3;
+  --muted:#B8B8B8;
+  --accent:#C1A875;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:#0B0B0B;
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Arial,sans-serif;
+  line-height:1.85;
+  scroll-behavior:smooth;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Fixed translucent nav */
+.topnav{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; flex-wrap:wrap; gap:14px; justify-content:center;
+  padding:10px 14px;
+  background:rgba(10,10,10,0.6);
+  backdrop-filter:saturate(140%) blur(8px);
+}
+.topnav a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:.9rem; letter-spacing:.08em;
+  padding:6px 10px; border-radius:8px;
+  transition:color .25s ease, background .25s ease, opacity .25s ease;
+  opacity:.9;
+}
+.topnav a:hover{ color:var(--accent); opacity:1; }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.85;
-  scroll-behavior: smooth;
+/* Header (not fixed) */
+.site-header{
+  text-align:center;
+  padding:132px 16px 24px; /* space for fixed nav */
 }
-
-/* Стеклянная шапка */
-.glass-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  text-align: center;
-  background: rgba(15,15,15,0.45);
-  backdrop-filter: blur(12px) saturate(130%);
-  padding: 18px 16px 8px;
-  animation: fadeIn 2.5s ease forwards;
+.site-header h1{
+  font-family:'Playfair Display', Georgia, serif;
+  font-weight:700;
+  letter-spacing:.12em;
+  margin:0 0 10px;
+  font-size:clamp(28px,5vw,44px);
+  opacity:0; transform:translateY(24px);
+  animation:fadeUp 1.8s ease .15s forwards;
 }
-.glass-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.6rem, 3vw, 2rem);
-  color: var(--accent);
-  letter-spacing: .15em;
-  margin-bottom: 2px;
-}
-.glass-header .subtitle {
-  font-size: .8rem;
-  color: var(--muted);
-  letter-spacing: .25em;
-  text-transform: uppercase;
-}
-.gold-line {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  margin: 8px 0 10px;
-  opacity: 0;
-  animation: lineFade 2.5s ease 0.8s forwards;
+.site-header .subtitle{
+  text-transform:uppercase;
+  letter-spacing:.35em;
+  color:var(--muted);
+  font-size:.9rem;
+  margin:0;
+  opacity:0; transform:translateY(20px);
+  animation:fadeUp 1.8s ease .35s forwards;
 }
 
-/* Меню */
-.topnav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  padding: 6px 14px 12px;
+main{ width:min(940px,92%); margin:0 auto; padding:10px 0 72px; }
+main section{
+  padding:44px 0; /* airy sections */
+  opacity:0; transform:translateY(34px);
+  transition:opacity 1.6s ease, transform 1.6s ease;
 }
-.topnav a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  transition: color 0.3s ease, opacity 0.3s ease;
-  opacity: 0.85;
-}
-.topnav a:hover { color: var(--accent); opacity: 1; }
+main section.visible{ opacity:1; transform:translateY(0); }
 
-/* Контент */
-main {
-  width: min(940px, 92%);
-  margin: 160px auto 80px;
+/* Typography */
+h2,h3,h4{
+  font-family:'Playfair Display', Georgia, serif;
+  font-weight:600; letter-spacing:.03em;
+  color:var(--accent);
+  text-shadow:0 0 0 rgba(193,168,117,0);
+  transition:text-shadow 1.8s ease;
 }
-main section {
-  padding: 44px 0;
-  opacity: 0;
-  transform: translateY(34px);
-  transition: opacity 1.6s ease, transform 1.6s ease;
+main section.visible h2,
+main section.visible h3,
+main section.visible h4{
+  text-shadow:0 0 14px rgba(193,168,117,0.18);
 }
-main section.visible { opacity: 1; transform: translateY(0); }
+h2{ font-size:1.7rem; margin:0 0 14px; }
+h3{ font-size:1.15rem; margin:18px 0 8px; }
+h4{ font-size:1.05rem; margin:14px 0 6px; }
 
-/* Заголовки */
-h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent);
-  text-shadow: 0 0 0 rgba(193,168,117,0);
-  transition: text-shadow 1.8s ease;
-}
-main section.visible h2, main section.visible h3, main section.visible h4 {
-  text-shadow: 0 0 14px rgba(193,168,117,0.18);
-}
-h2 { font-size: 1.7rem; margin-bottom: 14px; }
-h3 { font-size: 1.15rem; margin: 18px 0 8px; }
+a{ color:var(--accent); }
+ul,ol{ padding-left:20px; }
 
-/* Кнопка и подвал */
-.site-footer { text-align: center; padding: 64px 16px 88px; }
-.cta {
-  display: inline-block;
-  background: var(--accent);
-  color: #000;
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  transition: transform .25s ease, filter .25s ease;
+/* Footer */
+.site-footer{ text-align:center; padding:64px 16px 88px; }
+.cta{
+  display:inline-block;
+  background:var(--accent);
+  color:#000;
+  text-decoration:none;
+  padding:14px 28px;
+  border-radius:999px;
+  font-weight:600;
+  letter-spacing:.04em;
+  transition:filter .25s ease, transform .25s ease;
 }
-.cta:hover { transform: translateY(-1px); filter: brightness(0.95); }
-.brandline {
-  color: var(--muted);
-  margin-top: 16px;
-  font-size: .92rem;
-  letter-spacing: .04em;
+.cta:hover{ filter:brightness(.94); transform:translateY(-1px); }
+.brandline{
+  color:var(--muted);
+  margin:16px 0 0;
+  font-size:.92rem; letter-spacing:.04em;
 }
 
-/* Анимации */
-@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-@keyframes lineFade { from {opacity: 0;} to {opacity: 1;} }
-@keyframes fadeUp { to {opacity: 1; transform: translateY(0);} }
+/* Keyframes */
+@keyframes fadeUp{{ to{{ opacity:1; transform:translateY(0); }} }}
 
-/* Адаптив */
-@media (max-width: 640px) {
-  .glass-header h1 { font-size: 1.3rem; }
-  .glass-header .subtitle { font-size: 0.7rem; }
-  .topnav a { font-size: 0.8rem; }
-}
+@media (max-width:640px){{
+  .topnav{{ gap:10px; padding:8px 10px; }}
+  .topnav a{{ font-size:.82rem; padding:6px 8px; }}
+  .site-header{{ padding:116px 14px 18px; }}
+  h2{{ font-size:1.5rem; }}
+}}
